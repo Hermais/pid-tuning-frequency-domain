@@ -13,6 +13,8 @@ clear; clc; close all;
 num = [1 4];
 den = conv([1 1], conv([1 2], [1 6]));    % Example: (s+1)(s+2)(s+6)
 G   = tf(num, den);
+G = tf(1, conv([1 0], conv([2 1], [2 1]))); % example from lecture 6 page 15.
+%G = tf(1, [1 10 20]); %test
 
 %% 2) Tune controllers using pidtune (automatically selects ?c)
 [CP,  infoP ] = pidtune(G, 'P');
@@ -42,7 +44,7 @@ Mp_PID = infoStepPID.Overshoot;
 essPID = abs(1 - dcgain(TPID));
 
 %% 5) Plot P-controller response
-figure(1);
+figure;
 step(TP); grid on;
 title('Step Response: P Controller');
 annotation('textbox',[0.15 0.6 0.3 0.2],...
@@ -55,7 +57,7 @@ annotation('textbox',[0.15 0.6 0.3 0.2],...
     'FitBoxToText','on');
 
 %% 6) Plot PI-controller response
-figure(2);
+figure;
 step(TPI); grid on;
 title('Step Response: PI Controller');
 annotation('textbox',[0.15 0.6 0.3 0.2],...
@@ -69,7 +71,7 @@ annotation('textbox',[0.15 0.6 0.3 0.2],...
     'FitBoxToText','on');
 
 %% 7) Plot PID-controller response
-figure(3);
+figure;
 step(TPID); grid on;
 title('Step Response: PID Controller');
 annotation('textbox',[0.15 0.6 0.3 0.2],...
