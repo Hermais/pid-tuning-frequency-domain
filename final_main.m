@@ -7,12 +7,12 @@
 clear; clc; close all;
 
 %% 1) User Specs and Plant Definition
-Mp_req   = 0.07;      % Desired max overshoot (fraction, e.g., 0.05 for 5%)
-Ts_req   = 50;        % Desired max settling time (s)
+Mp_req   = 0.06;      % Desired max overshoot (fraction, e.g., 0.05 for 5%)
+Ts_req   = 300;        % Desired max settling time (s)
 
 % Define your plant G(s) here.
 %G   = tf([1 4], conv([1 1], conv([1 2], [1 6])));
-%G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
+G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
 %G = tf(1, [1 10 20]);
 %G = tf(10, conv([1 1],  [1 2]));
 
@@ -112,7 +112,8 @@ for i = 1:length(controllers)
       bode(L); 
       grid on;
       title(['Bode Plot: ', ctrlStr]);
-      annotation('textbox',[0.15 0.6 0.3 0.2], ...
+      yShift = 0.2 ;  % shift down by 0.1 for each plot
+      annotation('textbox',[0.15 yShift 0.3 0.2], ...
         'String',{...
           sprintf('Phase Margin = %.1f°', PM), ...
           sprintf('\\omega_{PM} = %.3f rad/s', Wpm)}, ...
