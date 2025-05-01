@@ -12,9 +12,10 @@ clear; clc; close all;
 % Replace num/den with your system's numerator and denominator
 num = [1 4];
 den = conv([1 1], conv([1 2], [1 6]));    % Example: (s+1)(s+2)(s+6)
-G   = tf(num, den);
+%G   = tf(num, den);
 G = tf(1, conv([1 0], conv([2 1], [2 1]))); % example from lecture 6 page 15.
 %G = tf(1, [1 10 20]); %test
+%G = tf(10, conv([1 1], [1 2]));
 
 %% 2) Tune controllers using pidtune (automatically selects ?c)
 [CP,  infoP ] = pidtune(G, 'P');

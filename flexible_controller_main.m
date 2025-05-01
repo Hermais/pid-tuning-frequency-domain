@@ -7,13 +7,14 @@
 clear; clc; close all;
 
 %% 1) User Specs and Plant Definition
-Mp_req   = 0.01;      % Desired max overshoot (fraction, e.g., 0.05 for 5%)
+Mp_req   = 0.07;      % Desired max overshoot (fraction, e.g., 0.05 for 5%)
 Ts_req   = 7;        % Desired max settling time (s)
 
 % Define your plant G(s) here. Example: integrating process
 G   = tf([1 4], conv([1 1], conv([1 2], [1 6])));
-G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
-G = tf(1, [1 10 20]);
+%G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
+%G = tf(1, [1 10 20]);
+%G = tf(10, conv([1 1],  [1 2]));
 %% 2) Compute damping ratio and exact phase margin for overshoot spec
 zeta    = -log(Mp_req) / sqrt(pi^2 + (log(Mp_req))^2);
 phi_PM  = atan2(2*zeta, sqrt(sqrt(1+4*zeta^4) - 2*zeta^2)) * (180/pi);
