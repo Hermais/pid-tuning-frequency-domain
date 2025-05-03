@@ -9,17 +9,17 @@ clear; clc; close all;
 
 %% 1) User Specs and Plant Definition
 Mp_req   = 0.15;      % Desired max overshoot (fraction, e.g., 0.05 for 5%)
-Ts_req   = 5;       % Desired max settling time (s)
+Ts_req   = 35;       % Desired max settling time (s)
 
 % Define plant G(s) here.
 G   = tf([1 4], conv([1 1], conv([1 2], [1 6])));
 % Other examples:
-G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
+%G = tf(1, conv([1 0], conv([2 1], [2 1])));  % integrating process example
 %G = tf(1, [1 10 20]);
 %G = tf(10, conv([1 1],  [1 2]));
 %G = tf(1, [1 10 20]);
 %G = tf(1, conv([1 1],  [1 2]));
-%G = tf([1 4], conv([1 7], conv([1 8], conv([1 4], [1 16]))));
+%G   = tf([1 4], conv([1 7], conv([1 8], conv([1 4], [1 16]))));
 
 
 
@@ -134,7 +134,7 @@ end
 
 % NOTES:
 % Wgc (gain crossover frequency, |L(j?)|=1) is denoted Wpm in MATLAB.
-% Wpc (phase crossover frequency, <L(j?)=-180°) is denoted Wgm in MATLAB.
+% Wpc (phase crossover frequency, ?L(j?)=-180°) is denoted Wgm in MATLAB.
 
 %% (b) Bode plot of the plant for refrence.
       figure; 
@@ -145,7 +145,7 @@ end
       annotation('textbox',[0.15 yShift 0.3 0.2], ...
         'String',{...
           sprintf('Actual Phase Margin = %.1f°', PM), ...
-          sprintf('Actual W_{gc} = %.3f rad/s', Wpm), ...
+          sprintf('W_{gc} = %.3f rad/s', Wpm), ...
         sprintf('Gain Margin = %0.1f', Gm), ...
         sprintf('W_{pc} = %.3f rad/s', Wgm)}, ...
         'FitBoxToText','on');

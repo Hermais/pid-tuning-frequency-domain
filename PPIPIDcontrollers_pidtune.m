@@ -16,6 +16,8 @@ den = conv([1 1], conv([1 2], [1 6]));    % Example: (s+1)(s+2)(s+6)
 G = tf(1, conv([1 0], conv([2 1], [2 1]))); %integrating process
 %G = tf(1, [1 10 20]);
 %G = tf(10, conv([1 1], [1 2]));
+G = tf(1, conv([1 1],  [1 2]));
+
 
 %% 2) Tune controllers using pidtune (automatically selects wc)
 [CP,  infoP ] = pidtune(G, 'P');
